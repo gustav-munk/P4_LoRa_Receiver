@@ -59,9 +59,6 @@ void printArrays() {
 }
 
 
-
-
-
 void binaryConversion() {
   Serial.println("PACKAGE CONVERSION");
   for (int k = 0; k < 10; k++) {
@@ -87,9 +84,33 @@ void binaryConversion() {
     Serial.print(IDString);
     Serial.print(freqString);
     Serial.println(displacementString);
+
+  // For all three strings in the data package, the binary value are checked.
+    for (int n = 0; n < IDString.length(); n++) {
+      if (IDString[n] == '1') {
+        Serial.print("high");
+      } else if (IDString[n] == '0') {
+        Serial.print("low");
+      }
+    }
+
+    for (int n = 0; n < freqString.length(); n++) {
+      if (freqString[n] == '1') {
+        Serial.print("high");
+      } else if (freqString[n] == '0') {
+        Serial.print("low");
+      }
+    }
+
+    for (int n = 0; n < displacementString.length(); n++) {
+      if (displacementString[n] == '1') {
+        Serial.print("high");
+      } else if (displacementString[n] == '0') {
+        Serial.print("low");
+      }
+    }
   }
 }
-
 
 
 
@@ -102,7 +123,7 @@ void loop() {
 
     // received a packet
     Serial.print("Received packet: ");
-    Serial.print(packCount+1);
+    Serial.print(packCount + 1);
 
     // initialize variables for storing the values
     int id = 0;
@@ -126,15 +147,6 @@ void loop() {
       }
     }
 
-    /* // print the values
-    Serial.print("ID: ");
-    Serial.print(id);
-    Serial.print(", Frequency bin: ");
-    Serial.print(freq_bin);
-    Serial.print(", Displacement: ");
-    Serial.println(displacement);
-    */
-
     // store the values in arrays
     id_array[packCount] = id;
     freq_bin_array[packCount] = freq_bin;
@@ -154,10 +166,11 @@ void loop() {
     Serial.println("ALL PACKAGES RECEIVED");
     printArrays();
 
-    // convert packages to binary string
+    // convert packages to binary string and output
     binaryConversion();
 
-      // reset the counter variable for the next round of data packets
-      packCount = 0;
+
+    // reset the counter variable for the next round of data packets
+    packCount = 0;
   }
 }
